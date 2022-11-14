@@ -37,19 +37,15 @@ export function LoginPage() {
     //   }, []);
     
       useEffect(() => {
-        if (isError) {
-          dispatch(clearState());
-        }
-    
         if (isSuccess) {
-        //   dispatch(clearState());
           navigate('/home');
         }
-      }, [isError, isSuccess]);
+      }, [isSuccess]);
 
     return (
         <>
             <div className="App">
+                {!isSuccess && isError ? <div className="text-white bg-red-400 p-2 w-3/12 rounded-md">Invalid username or password.</div> : null}
                 <div className="container shadow-2xl w-3/12 h-auto rounded-md lg-auto">
                     <h1 className="text-2xl font-bold pt-2">Sign in here</h1>
                     <form>
