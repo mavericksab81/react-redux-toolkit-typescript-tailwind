@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import {  getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 
+// add your firebase config here to make it working.
 export const firebaseConfig = {
     apiKey: "",
     authDomain: "",
