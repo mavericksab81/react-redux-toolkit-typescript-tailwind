@@ -13,6 +13,7 @@ export function LoginPage() {
         email: '',
         password: ''
     });
+    // console.log(isError);
     const [loading, setLoading] = useState(false);
     let navigate = useNavigate();
 
@@ -27,16 +28,22 @@ export function LoginPage() {
     const handleSubmit = (event: React.SyntheticEvent) => {
         event.preventDefault();
         setLoading(true);
-        dispatch(loginUser({ username: loginForm.email, password: loginForm.password }));
+        if (loginForm.email && loginForm.password) {
+            // dispatching the error to clear state as we are trying to invoke a new state.
+            if (isError) {
+                dispatch(clearState());
+            }
+            dispatch(loginUser({ username: loginForm.email, password: loginForm.password }));
+        }
     }
 
     // useEffect(() => {
     //     return () => {
-    //       dispatch(clearState());
+            
     //     };
     //   }, []);
     
-      useEffect(() => {
+    useEffect(() => {
         if (isSuccess) {
           navigate('/home');
         }
@@ -45,7 +52,7 @@ export function LoginPage() {
     return (
         <>
             <div className="App">
-                {!isSuccess && isError ? <div className="text-white bg-red-400 p-2 w-3/12 rounded-md">Invalid username or password.</div> : null}
+                {isError ? <div className="text-white bg-red-400 p-2 w-3/12 rounded-md mb-4">Invalid username or password.</div> : null}
                 <div className="container shadow-2xl w-3/12 h-auto rounded-md lg-auto">
                     <h1 className="text-2xl font-bold pt-2">Sign in here</h1>
                     <form>

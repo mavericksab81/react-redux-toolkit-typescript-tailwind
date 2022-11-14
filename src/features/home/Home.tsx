@@ -25,7 +25,7 @@ export function HomePage() {
     }
     return (
         <>
-            <div className="flex justify-between items-center pl-4 pr-4 pt-4">
+            <div className="flex justify-end gap-x-4 items-center pl-4 pr-4 pt-4">
             <div>Welcome, <strong>{email}</strong></div>
             <button className="flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 onClick={handleLogout}>Logout</button>

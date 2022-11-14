@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
-import { signInFirebase } from "../../utils/firebase/firebase.utils";
+import signInFirebase from "../../utils/firebase/firebase.utils";
 import { User } from "./user.interface";
 
 export interface AuthState {
@@ -53,26 +53,27 @@ export const authSlice = createSlice({
           state.isFetching = false;
           state.email = '';
           state.accessToken = '';
+          state.errorMessage = '';
         return state;
       },
     },
-    extraReducers: {
-      [loginUser.fulfilled]: (state: any, { payload }: any) => {
+  extraReducers: (builder) => {
+    builder
+      .addCase(loginUser.fulfilled, (state: any, { payload }: any) => {
         state.email = payload.email;
         state.accessToken = payload.accessToken;
         state.isFetching = false;
         state.isSuccess = true;
         return state;
-      },
-      [loginUser.rejected]: (state: any, { payload }: any) => {
-        console.log('payload', payload);
+    })
+      .addCase(loginUser.rejected, (state: any, { payload }: any) => {
         state.isFetching = false;
         state.isError = true;
         state.errorMessage = payload?.message || "Invalid username or password.";
-      },
-      [loginUser.pending]: (state: any) => {
+      })
+      .addCase(loginUser.pending, (state: any, { payload }: any) => {
         state.isFetching = true;
-      },
+      })
     },
   });
 
