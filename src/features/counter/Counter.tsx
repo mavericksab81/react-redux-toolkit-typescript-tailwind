@@ -4,6 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
   decrement,
   increment,
+  reset,
   incrementByAmount,
   incrementAsync,
   incrementIfOdd,
@@ -44,6 +45,12 @@ export function Counter() {
           value={incrementAmount}
           onChange={(e) => setIncrementAmount(e.target.value)}
         />
+        <button
+          className={styles.button}
+          onClick={() => dispatch(reset())}
+        >
+          Reset
+        </button>
         <button
           className={styles.button}
           onClick={() => dispatch(incrementByAmount(incrementValue))}
